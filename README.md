@@ -13,7 +13,7 @@
 
 - [Well-Architected Framework Billing Guidance](https://wellarchitected.github.com/library/governance/recommendations/managing-ai-credits/)
 - [Improve Agent Quality and Token Optimization](https://support.github.com/product-guides/github-copilot/accelerate-usage/improve-agent-quality-and-token-optimization)
-- [GitHub Learn – Usage Based Billing Module](https://learn.github.com/courses/gitHubusagebasedbillingmodule)
+- [GitHub Learn – Usage-Based Billing Module](https://learn.github.com/courses/gitHubusagebasedbillingmodule)
 - [Token Optimization Best Practices – Visual Guide](https://ashy-dune-0b4215a0f.7.azurestaticapps.net/index.html)
 
 ## Billing Controls & Webinars
