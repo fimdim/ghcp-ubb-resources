@@ -19,4 +19,4 @@
 ## Billing Controls & Webinars
 
 - [Usage-Based Billing with Confidence: GitHub Billing Platform Controls - Webinar Series](https://learn.github.com/event/bb786fa6-d94c-4dd9-9917-11eee58265ef)
-- [Usage Based Billing with Confidence: Agent Quality & Token Optimization - Webinar Series](https://learn.github.com/event/390d8d96-a2ba-4d80-aa8d-9f68b6bfaa3b)
+- [Usage-Based Billing with Confidence: Agent Quality & Token Optimization - Webinar Series](https://learn.github.com/event/390d8d96-a2ba-4d80-aa8d-9f68b6bfaa3b)
