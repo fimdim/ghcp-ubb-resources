@@ -1,4 +1,4 @@
-# GitHub Copilot Usage-Based Billing Resources
+# GitHub Copilot Usage-Based Billing (UBB) Resources
 
 ## Enterprise Plans & Platform
 
