@@ -7,7 +7,7 @@
 - [Usage-Based Billing for Organizations and Enterprises](https://docs.github.com/copilot/concepts/billing/usage-based-billing-for-organizations-and-enterprises)
 - [GitHub Copilot Usage-Based Billing Announcement](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/)
 - [Models and Pricing for GitHub Copilot](https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing)
-- [AI Model Comparison](https://docs.github.com/en/copilot/reference/ai-models/model-comparison)
+- [AI Model Comparison](https://docs.github.com/copilot/reference/ai-models/model-comparison)
 - [Understanding Copilot Budgeting](https://support.github.com/product-guides/github-copilot/get-started/understanding-copilot-budgeting)
 
 ## Optimization & Governance
