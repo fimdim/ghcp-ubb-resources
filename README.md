@@ -7,6 +7,7 @@
 - [Usage-Based Billing for Organizations and Enterprises](https://docs.github.com/copilot/concepts/billing/usage-based-billing-for-organizations-and-enterprises)
 - [GitHub Copilot Usage-Based Billing Announcement](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/)
 - [Models and Pricing for GitHub Copilot](https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing)
+- [AI Model Comparison](https://docs.github.com/copilot/reference/ai-models/model-comparison)
 - [Understanding Copilot Budgeting](https://support.github.com/product-guides/github-copilot/get-started/understanding-copilot-budgeting)
 
 ## Optimization & Governance
@@ -20,3 +21,8 @@
 
 - [Usage-Based Billing with Confidence: GitHub Billing Platform Controls - Webinar Series](https://learn.github.com/event/bb786fa6-d94c-4dd9-9917-11eee58265ef)
 - [Usage-Based Billing with Confidence: Agent Quality & Token Optimization - Webinar Series](https://learn.github.com/event/390d8d96-a2ba-4d80-aa8d-9f68b6bfaa3b)
+
+## REST API Reference
+
+- [REST API Endpoints for Billing](https://docs.github.com/rest/billing/billing?apiVersion=2022-11-28)
+- [REST API Endpoints for Billing Budgets](https://docs.github.com/rest/billing/budgets?apiVersion=2022-11-28)
