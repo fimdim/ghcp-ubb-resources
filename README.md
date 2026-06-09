@@ -2,13 +2,14 @@
 
 ## Enterprise Plans & Platform
 
-- [GitHub Copilot Documentation](https://docs.github.com/copilot/)
-- [GitHub Copilot Billing Documentation](https://docs.github.com/copilot/concepts/billing)
-- [Usage-Based Billing for Organizations and Enterprises](https://docs.github.com/copilot/concepts/billing/usage-based-billing-for-organizations-and-enterprises)
+- [GitHub Copilot Documentation](https://docs.github.com/en/enterprise-cloud@latest/copilot)
+- [GitHub Copilot Billing Documentation](https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/billing)
+- [Usage-Based Billing for Organizations and Enterprises](https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/billing/usage-based-billing-for-organizations-and-enterprises)
 - [GitHub Copilot Usage-Based Billing Announcement](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/)
-- [Models and Pricing for GitHub Copilot](https://docs.github.com/copilot/reference/copilot-billing/models-and-pricing)
-- [AI Model Comparison](https://docs.github.com/copilot/reference/ai-models/model-comparison)
+- [Models and Pricing for GitHub Copilot](https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/copilot-billing/models-and-pricing)
+- [AI Model Comparison](https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/ai-models/model-comparison)
 - [Understanding Copilot Budgeting](https://support.github.com/product-guides/github-copilot/get-started/understanding-copilot-budgeting)
+- [Budgets for usage-based billing](https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/billing/budgets-for-usage-based-billing)
 
 ## Optimization & Governance
 
@@ -25,4 +26,4 @@
 ## REST API Reference
 
 - [REST API Endpoints for Billing](https://docs.github.com/rest/billing/billing?apiVersion=2022-11-28)
-- [REST API Endpoints for Billing Budgets](https://docs.github.com/rest/billing/budgets?apiVersion=2022-11-28)
+- [REST API Endpoints for Billing Budgets](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/budgets?apiVersion=2022-11-28)
