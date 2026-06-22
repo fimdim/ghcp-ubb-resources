@@ -14,9 +14,17 @@
 ## Optimization & Governance
 
 - [Well-Architected Framework Billing Guidance](https://wellarchitected.github.com/library/governance/recommendations/managing-ai-credits/)
-- [Improve Agent Quality and Token Optimization](https://support.github.com/product-guides/github-copilot/accelerate-usage/improve-agent-quality-and-token-optimization)
 - [GitHub Learn – Usage-Based Billing Module](https://learn.github.com/courses/gitHubusagebasedbillingmodule)
+
+## Token Economics & Efficiency
+
+- [Improving Token Efficiency in GitHub Copilot](https://code.visualstudio.com/blogs/2026/06/17/improving-token-efficiency-in-github-copilot)
+- [Getting More From Each Token: How Copilot Improves Context Handling and Model Routing](https://github.blog/ai-and-ml/github-copilot/getting-more-from-each-token-how-copilot-improves-context-handling-and-model-routing/)
+- [Improve Agent Quality and Token Optimization](https://support.github.com/product-guides/github-copilot/accelerate-usage/improve-agent-quality-and-token-optimization)
 - [Token Optimization Best Practices – Visual Guide](https://ashy-dune-0b4215a0f.7.azurestaticapps.net/index.html)
+- [Token Economics: The Atomic Unit of AI Value (FinOps Foundation)](https://www.finops.org/insights/token-economics-the-atomic-unit-of-ai-value/)
+- [Linux Foundation Announces Intent to Launch the Tokenomics Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-intent-to-launch-the-tokenomics-foundation-to-establish-open-standards-for-ai-cost-management)
+- [Measuring GenAI Impact – Well-Architected Scenario](https://learn.github.com/well-architected/scenarios/measuring-genai-impact)
 
 ## Billing Controls & Webinars
 
@@ -27,3 +35,4 @@
 
 - [REST API Endpoints for Billing](https://docs.github.com/rest/billing/billing?apiVersion=2022-11-28)
 - [REST API Endpoints for Billing Budgets](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/budgets?apiVersion=2022-11-28)
+- [REST API Endpoints for Usage Reports](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/usage-reports?apiVersion=2026-03-10)
