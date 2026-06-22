@@ -33,6 +33,5 @@
 
 ## REST API Reference
 
-- [REST API Endpoints for Billing](https://docs.github.com/rest/billing/billing?apiVersion=2022-11-28)
 - [REST API Endpoints for Billing Budgets](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/budgets?apiVersion=2022-11-28)
 - [REST API Endpoints for Usage Reports](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/usage-reports?apiVersion=2026-03-10)
