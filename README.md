@@ -35,3 +35,12 @@
 
 - [REST API Endpoints for Billing Budgets](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/budgets?apiVersion=2022-11-28)
 - [REST API Endpoints for Usage Reports](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/usage-reports?apiVersion=2026-03-10)
+- 
+## Power Tools
+
+- [The Agentic SDLC Handbook](https://danielmeppiel.github.io/agentic-sdlc-handbook/)
+- [microsoft/apm](https://github.com/microsoft/apm)
+- [github/awesome-copilot](https://github.com/github/awesome-copilot)
+- [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)
+- [rtk-ai/rtk](https://github.com/rtk-ai/rtk)
+- [edouard-claude/snip](https://github.com/edouard-claude/snip)
