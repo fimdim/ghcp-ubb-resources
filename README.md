@@ -22,9 +22,10 @@
 - [Getting More From Each Token: How Copilot Improves Context Handling and Model Routing](https://github.blog/ai-and-ml/github-copilot/getting-more-from-each-token-how-copilot-improves-context-handling-and-model-routing/)
 - [Improve Agent Quality and Token Optimization](https://support.github.com/product-guides/github-copilot/accelerate-usage/improve-agent-quality-and-token-optimization)
 - [Token Optimization Best Practices – Visual Guide](https://ashy-dune-0b4215a0f.7.azurestaticapps.net/index.html)
+- [Measuring GenAI Impact – Well-Architected Scenario](https://learn.github.com/well-architected/scenarios/measuring-genai-impact)
+- [Evaluating performance and efficiency of the GitHub Copilot agentic harness across models and tasks](https://github.blog/ai-and-ml/github-copilot/evaluating-performance-and-efficiency-of-the-github-copilot-agentic-harness-across-models-and-tasks/)
 - [Token Economics: The Atomic Unit of AI Value (FinOps Foundation)](https://www.finops.org/insights/token-economics-the-atomic-unit-of-ai-value/)
 - [Linux Foundation Announces Intent to Launch the Tokenomics Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-intent-to-launch-the-tokenomics-foundation-to-establish-open-standards-for-ai-cost-management)
-- [Measuring GenAI Impact – Well-Architected Scenario](https://learn.github.com/well-architected/scenarios/measuring-genai-impact)
 
 ## Billing Controls & Webinars
 
@@ -35,7 +36,7 @@
 
 - [REST API Endpoints for Billing Budgets](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/budgets?apiVersion=2022-11-28)
 - [REST API Endpoints for Usage Reports](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/usage-reports?apiVersion=2026-03-10)
-- 
+
 ## Power Tools
 
 - [The Agentic SDLC Handbook](https://danielmeppiel.github.io/agentic-sdlc-handbook/)
