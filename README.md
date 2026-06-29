@@ -27,6 +27,7 @@ Resources for finance teams, admins, and governance stakeholders to manage costs
 ### 🏛️ Governance & Architecture
 
 - [Well-Architected Framework Billing Guidance](https://wellarchitected.github.com/library/governance/recommendations/managing-ai-credits/)
+- [Controlling and tracking costs at scale](https://docs.github.com/en/billing/tutorials/control-costs-at-scale)
 
 ### 💎 Token Economics & Standards
 
@@ -85,3 +86,12 @@ Developer resources for integrating Copilot billing with your systems and commun
 ### 📖 Handbooks & Guides
 
 - [The Agentic SDLC Handbook](https://danielmeppiel.github.io/agentic-sdlc-handbook/)
+
+## 🗺️ Roadmap
+
+GitHub Roadmap resources and upcoming features for Copilot and related services.
+
+### 📋 GitHub Public Roadmap
+
+- [All Items · GitHub Public Roadmap](https://github.com/orgs/github/projects/4247/views/1)
+- [GitHub Roadmap Webinar, Q2 2026](https://github.ondemand.goldcast.io/on-demand/1dd0b7b0-5d4e-4c83-b231-24a4eef1675a?utm_source=social_linkedin&utm_medium=social&utm_campaign=AMER+Q2+Roadmap+Webinar)
