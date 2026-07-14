@@ -2,6 +2,17 @@
 
 Curated resources organized by role and use case to help you understand, govern, and optimize GitHub Copilot with usage-based billing.
 
+## Quick Navigation
+
+- [Getting Started](#-getting-started)
+- [Cost & Governance](#-cost--governance)
+- [Optimization & Performance](#-optimization--performance)
+- [Learning & Webinars](#-learning--webinars)
+- [API & Integration](#-api--integration)
+- [Roadmap](#-roadmap)
+- [Interactive Web Version](#-interactive-web-version)
+- [Contributing](#-contributing)
+
 ## 🚀 Getting Started
 
 Resources for understanding the fundamentals of Copilot UBB, pricing models, and setup.
@@ -130,3 +141,25 @@ GitHub Roadmap resources and upcoming features for Copilot and related services.
 
 - [All Items · GitHub Public Roadmap](https://github.com/orgs/github/projects/4247/views/1)
 - [GitHub Roadmap Webinar, Q2 2026](https://github.ondemand.goldcast.io/on-demand/1dd0b7b0-5d4e-4c83-b231-24a4eef1675a?utm_source=social_linkedin&utm_medium=social&utm_campaign=AMER+Q2+Roadmap+Webinar)
+
+## 🌐 Interactive Web Version
+
+This repository also includes an interactive version of these resources in [index.html](./index.html).
+
+### Run Locally
+
+- Open [index.html](./index.html) directly in your browser, or
+- Serve the folder with a local static server for stricter CSP behavior testing.
+
+## 🤝 Contributing
+
+Contributions are welcome. If you want to add or update links:
+
+- Prefer official documentation, reputable community references, or durable recorded resources.
+- Group new links under the most relevant existing section.
+- Keep labels concise and descriptive.
+- Remove or replace broken/outdated links when possible.
+
+## ⚠️ Disclaimer
+
+External links are provided for convenience and may change over time. Verify pricing, policy, and feature details against the official GitHub documentation before making operational or financial decisions.

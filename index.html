@@ -3,9 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; style-src 'self' 'unsafe-inline' https://unpkg.com; script-src 'self' 'unsafe-inline'; img-src 'self' https://octodex.github.com data:; font-src 'self' data:" />
   <title>GitHub Copilot UBB Resources</title>
   <meta name="description" content="Curated resources for GitHub Copilot Usage-Based Billing — enterprise plans, token economics, governance, and power tools." />
-  <link rel="stylesheet" href="https://unpkg.com/@primer/css@22.3.0/dist/primer.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@primer/css@22.3.0/dist/primer.css"
+        integrity="sha384-3OFiqOOryBIKqOxTxWb6o5F99toIZ7F6nzewPkgo6CrIdmc36fRkUHlpj8/2VswV"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>
+    // Set theme before first paint to avoid a flash of the wrong theme (FOUC).
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
   <style>
     /* ─── Primer Design Tokens ─── */
     :root {
@@ -78,6 +93,7 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1.5rem;
+      position: relative;
       height: 56px;
       display: flex;
       align-items: center;
@@ -249,11 +265,11 @@
     }
 
     /* ── Section (hidden by default, shown when active) ── */
-    section {
+    main section {
       display: none;
     }
 
-    section.active {
+    main section.active {
       display: block;
       animation: fadeIn 0.2s ease-in-out;
     }
@@ -551,6 +567,340 @@
         margin-bottom: 1.5rem;
       }
     }
+
+    /* ── Summer Edition ── */
+    .summer-toggle {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 6px 12px;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .summer-toggle:hover {
+      background: linear-gradient(135deg, #d97706, #ea580c);
+      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+      transform: translateX(-50%) translateY(-1px);
+    }
+
+    .summer-toggle.active {
+      background: linear-gradient(135deg, #92400e, #9a3412);
+      box-shadow: none;
+      transform: translateX(-50%);
+    }
+
+    #summer-view {
+      display: none;
+      flex-direction: column;
+      height: calc(100vh - 56px);
+    }
+
+    #summer-view.visible {
+      display: flex;
+    }
+
+    .summer-banner {
+      background: linear-gradient(135deg, #fffbeb 0%, #fff7ed 100%);
+      border-bottom: 1px solid #fde68a;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+
+    html[data-theme="dark"] .summer-banner {
+      background: linear-gradient(135deg, #1c1008 0%, #1a0e06 100%);
+      border-bottom-color: #78350f;
+    }
+
+    .summer-back-btn {
+      background: var(--primer-bg);
+      border: 1px solid var(--primer-border);
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 5px 12px;
+      color: var(--primer-text);
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .summer-back-btn:hover {
+      border-color: var(--primer-accent);
+      color: var(--primer-accent);
+    }
+
+    .summer-banner-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .summer-banner-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #92400e;
+      line-height: 1.3;
+    }
+
+    html[data-theme="dark"] .summer-banner-title {
+      color: #fbbf24;
+    }
+
+    .summer-banner-desc {
+      font-size: 0.75rem;
+      color: #b45309;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    html[data-theme="dark"] .summer-banner-desc {
+      color: #d97706;
+    }
+
+    .summer-iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .summer-toggle {
+        padding: 6px 8px;
+        font-size: 0.8rem;
+      }
+
+      .summer-toggle .summer-label {
+        display: none;
+      }
+
+      .summer-banner {
+        padding: 0.6rem 1rem;
+        gap: 0.75rem;
+      }
+
+      .summer-banner-desc {
+        display: none;
+      }
+    }
+
+    /* ── Summer Workbook (HTML version) ── */
+    .summer-workbook {
+      flex: 1;
+      overflow-y: auto;
+      background: var(--primer-bg-soft);
+    }
+
+    .wb-hero {
+      background: linear-gradient(135deg, #0550ae 0%, var(--primer-accent) 100%);
+      color: white;
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
+    }
+    .wb-hero h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800; margin: 0 0 0.2rem; letter-spacing: -0.02em; }
+    .wb-hero-sub { font-size: 0.95rem; font-weight: 600; opacity: .85; margin: 0 0 .75rem; }
+    .wb-hero-desc { font-size: .87rem; opacity: .88; max-width: 520px; margin: 0 auto 1.25rem; line-height: 1.65; }
+    .wb-pills { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; }
+    .wb-pill { padding: 4px 14px; border-radius: 20px; font-size: .75rem; font-weight: 700; letter-spacing: .03em; border: 2px solid rgba(255,255,255,.6); color: rgba(255,255,255,.9); }
+    .wb-pill-time { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.45); color: white; }
+
+    .wb-content { max-width: 720px; margin: 0 auto; padding: 1.75rem 1.25rem 4rem; }
+
+    .wb-intro {
+      background: var(--primer-bg);
+      border: 1px solid var(--primer-border);
+      border-radius: 8px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--primer-shadow-sm);
+    }
+    .wb-mona {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--primer-border);
+      background: var(--primer-bg-soft);
+      box-shadow: var(--primer-shadow-sm);
+    }
+    .wb-mona img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+    .wb-intro p { margin: 0; font-size: .9rem; line-height: 1.65; color: var(--primer-text); }
+
+    .wb-timeline { display: flex; flex-direction: column; gap: .75rem; }
+
+    /* Break card */
+    .wb-break {
+      background: var(--primer-bg);
+      border: 2px dashed var(--primer-border);
+      border-radius: 8px;
+      padding: .9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+    }
+    .wb-break-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--primer-border);
+      background: var(--primer-bg-soft);
+      box-shadow: var(--primer-shadow-sm);
+    }
+    .wb-break-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+    .wb-break-body { flex: 1; min-width: 0; }
+    .wb-break-title { font-size: .88rem; font-weight: 700; color: var(--primer-text); line-height: 1.3; }
+    .wb-break-desc { font-size: .75rem; color: var(--primer-text-secondary); margin-top: .1rem; }
+    .wb-break-badge {
+      background: var(--primer-success); color: white; font-size: .65rem; font-weight: 700;
+      letter-spacing: .07em; padding: 4px 10px; border-radius: 6px;
+      flex-shrink: 0; white-space: nowrap; text-transform: uppercase;
+    }
+    .wb-break-link {
+      background: var(--primer-success); color: white; font-size: .78rem; font-weight: 700;
+      padding: 5px 12px; border-radius: 6px; text-decoration: none;
+      flex-shrink: 0; transition: opacity .15s;
+    }
+    .wb-break-link:hover { opacity: .85; }
+
+    /* Stop */
+    .wb-stop-wrap { display: flex; gap: .9rem; align-items: flex-start; }
+    .wb-stop-num {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--primer-accent); color: var(--primer-accent-fg);
+      font-size: .82rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1.1rem;
+      box-shadow: 0 0 0 3px var(--primer-bg-soft), 0 0 0 5px var(--primer-accent);
+    }
+    .wb-stop-card {
+      flex: 1;
+      background: var(--primer-bg);
+      border: 1px solid var(--primer-border);
+      border-radius: 8px;
+      padding: 1.15rem 1.4rem;
+      box-shadow: var(--primer-shadow-sm);
+    }
+    .wb-stop-eyebrow { font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--primer-accent); margin-bottom: .15rem; }
+    .wb-stop-title { font-size: 1.15rem; font-weight: 800; color: var(--primer-text); margin: 0 0 .6rem; letter-spacing: -.01em; }
+    .wb-stop-meta { display: flex; align-items: center; gap: .5rem; margin-bottom: .9rem; }
+    .wb-aud { font-size: .7rem; font-weight: 700; padding: 2px 9px; border-radius: 4px; border: 1px solid; }
+    .wb-aud-admins { background: rgba(191,135,0,.1); border-color: var(--primer-warning); color: var(--primer-warning); }
+    .wb-aud-devs   { background: rgba(9,105,218,.08); border-color: var(--primer-accent);  color: var(--primer-accent);  }
+    .wb-aud-all    { background: rgba(26,127,55,.1);  border-color: var(--primer-success); color: var(--primer-success); }
+    .wb-t { font-size: .7rem; background: var(--primer-bg-soft); color: var(--primer-text-secondary); border: 1px solid var(--primer-border); padding: 2px 8px; border-radius: 4px; font-weight: 600; white-space: nowrap; }
+
+    /* Resource list */
+    .wb-resources { border: 1px solid var(--primer-border); border-radius: 8px; overflow: hidden; }
+    .wb-res {
+      display: flex; align-items: center; gap: .7rem;
+      padding: .6rem .85rem;
+      text-decoration: none; color: var(--primer-text);
+      border-bottom: 1px solid var(--primer-border-muted);
+      transition: background .15s;
+    }
+    .wb-res:last-child { border-bottom: none; }
+    .wb-res:hover { background: var(--primer-bg-soft); }
+    .wb-res-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--primer-accent); flex-shrink: 0; }
+    .wb-res-dot-ex { background: var(--primer-warning); }
+    .wb-res-body { flex: 1; min-width: 0; }
+    .wb-res-name { font-size: .86rem; font-weight: 600; color: var(--primer-text); line-height: 1.3; }
+    .wb-res-type { font-size: .7rem; color: var(--primer-text-tertiary); margin-top: 1px; }
+    .wb-res-right { display: flex; align-items: center; gap: .45rem; flex-shrink: 0; }
+    .wb-res-time { font-size: .67rem; background: var(--primer-bg-soft); color: var(--primer-text-secondary); border: 1px solid var(--primer-border); padding: 2px 7px; border-radius: 4px; font-weight: 600; white-space: nowrap; }
+    .wb-res-open { font-size: .73rem; font-weight: 700; color: var(--primer-accent); white-space: nowrap; }
+    .wb-res:hover .wb-res-open { text-decoration: underline; }
+
+    .wb-ex-label {
+      font-size: .63rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+      color: var(--primer-text-tertiary); padding: .45rem .85rem .3rem;
+      background: var(--primer-bg-soft); border-top: 1px solid var(--primer-border-muted);
+    }
+    .wb-res-ex { background: var(--primer-bg-soft); }
+
+    /* Checklist */
+    .wb-checklist {
+      background: var(--primer-bg);
+      border: 1px solid var(--primer-border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      margin-top: .75rem;
+      box-shadow: var(--primer-shadow-sm);
+    }
+    .wb-cl-title {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primer-text);
+      margin: 0 0 .2rem;
+    }
+    .wb-cl-title img {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      object-fit: cover;
+      object-position: center;
+      flex-shrink: 0;
+      border: 1px solid var(--primer-border);
+      background: var(--primer-bg-soft);
+    }
+    .wb-cl-desc { font-size: .76rem; color: var(--primer-text-secondary); margin-bottom: .9rem; }
+    .wb-cl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .45rem 1.5rem; }
+    .wb-cl-item { display: flex; align-items: flex-start; gap: .45rem; font-size: .84rem; font-weight: 600; color: var(--primer-text); cursor: pointer; user-select: none; line-height: 1.35; }
+    .wb-cl-item input[type="checkbox"] { margin-top: 2px; width: 14px; height: 14px; cursor: pointer; accent-color: var(--primer-accent); flex-shrink: 0; }
+    .wb-cl-item.checked { text-decoration: line-through; opacity: .55; }
+
+    /* Footer */
+    .wb-final { background: linear-gradient(135deg, #0550ae 0%, var(--primer-accent) 100%); color: white; border-radius: 8px; padding: 2rem 1.5rem; text-align: center; margin-top: .75rem; }
+    .wb-final h2 { font-size: 1.55rem; font-weight: 800; margin: 0 0 .5rem; }
+    .wb-final p { font-size: .86rem; opacity: .88; max-width: 400px; margin: 0 auto 1.2rem; line-height: 1.65; }
+    .wb-months { display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; }
+    .wb-month { border: 1px solid rgba(255,255,255,.4); color: rgba(255,255,255,.9); font-size: .68rem; font-weight: 700; letter-spacing: .06em; padding: 4px 12px; border-radius: 20px; }
+
+    @media (max-width: 600px) {
+      .wb-cl-grid { grid-template-columns: 1fr; }
+      .wb-stop-wrap { gap: .6rem; }
+      .wb-res-time { display: none; }
+      .wb-stop-num { width: 26px; height: 26px; font-size: .75rem; margin-top: 1rem; }
+    }
   </style>
 </head>
 <body>
@@ -563,6 +913,9 @@
         </svg>
         <span>GitHub Copilot UBB Resources</span>
       </a>
+      <button class="summer-toggle" id="summerToggle" aria-label="Switch to Summer Edition">
+        ☀️ <span class="summer-label">Summer Edition</span>
+      </button>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <span id="themeIcon">🌙</span>
         <span id="themeLabel">Dark</span>
@@ -570,30 +923,470 @@
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-icon" aria-hidden="true">
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M12 6v6l4 2"/>
-      </svg>
+  <!-- Summer Edition view -->
+  <div id="summer-view" role="region" aria-label="Summer Edition — GitHub Holiday Workbook">
+    <div class="summer-banner">
+      <button class="summer-back-btn" id="summerBack" aria-label="Back to Resources">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Resources
+      </button>
+      <div class="summer-banner-info">
+        <div class="summer-banner-title">🏖️ The GitHub Holiday Workbook</div>
+        <div class="summer-banner-desc">Follow the Octocat on the summer learning trip — for developers and admins &nbsp;·&nbsp; All steps ≈ 9 h</div>
+      </div>
+      <a class="summer-back-btn" href="the-github-holiday-workbook.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download PDF">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        Download PDF
+      </a>
     </div>
-    <h1>GitHub Copilot<br/><span>Usage-Based Billing</span></h1>
-    <p>A curated collection of resources to help you understand, govern, and optimize GitHub Copilot with usage-based billing.</p>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-num">7</div><div class="stat-label">Categories</div></div>
-      <div class="stat"><div class="stat-num">32+</div><div class="stat-label">Resources</div></div>
-      <div class="stat"><div class="stat-num">2026</div><div class="stat-label">Updated</div></div>
-    </div>
-  </section>
+
+    <!-- HTML Workbook -->
+    <div class="summer-workbook" id="summerWorkbook">
+      <!-- Hero -->
+      <div class="wb-hero">
+        <h1>The GitHub Holiday Workbook</h1>
+        <p class="wb-hero-sub">for developers and admins</p>
+        <p class="wb-hero-desc">Follow the Octocat on the summer learning trip, from packing the bags to coming back in September. Every stop has a few resources (with the time each one takes). Don't skip the little breaks along the way!</p>
+        <div class="wb-pills">
+          <span class="wb-pill wb-pill-admins">Admins</span>
+          <span class="wb-pill wb-pill-devs">Developers</span>
+          <span class="wb-pill wb-pill-time">⏱ All steps ≈ 9 h</span>
+        </div>
+      </div>
+
+      <div class="wb-content">
+        <!-- Mona intro -->
+        <div class="wb-intro">
+          <div class="wb-mona" aria-hidden="true"><img src="https://octodex.github.com/images/original.png" alt=""></div>
+          <p><strong>Hi, I'm Mona the Octocat!</strong> I'll guide you through this Holiday Workbook. Fasten your seat belt, take a long breath, and let's jump into it.</p>
+        </div>
+
+        <div class="wb-timeline">
+
+          <!-- Pre-break -->
+          <div class="wb-break">
+            <div class="wb-break-icon" aria-hidden="true"><img src="https://octodex.github.com/images/securityknightocat.png" alt=""></div>
+            <div class="wb-break-body">
+              <div class="wb-break-title">We did not even start, but it is time for a break.</div>
+              <div class="wb-break-desc">Build your own Octocat at myoctocat.com</div>
+            </div>
+            <a class="wb-break-link" href="https://myoctocat.com" target="_blank" rel="noopener noreferrer">Build it ↗</a>
+          </div>
+
+          <!-- Stop 1 -->
+          <div class="wb-stop-wrap">
+            <div class="wb-stop-num">1</div>
+            <div class="wb-stop-card">
+              <div class="wb-stop-eyebrow">Stop 1</div>
+              <h2 class="wb-stop-title">Understand Usage-Based Billing</h2>
+              <div class="wb-stop-meta">
+                <span class="wb-aud wb-aud-admins">Admins</span>
+                <span class="wb-t">⏱ ≈ 44 min</span>
+              </div>
+              <div class="wb-resources">
+                <a class="wb-res" href="https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">GitHub Copilot is moving to usage-based billing</div><div class="wb-res-type">Article · The GitHub Blog</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 4 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/billing/usage-based-billing-for-organizations-and-enterprises" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Usage-Based Billing for organizations &amp; enterprises</div><div class="wb-res-type">Docs · GitHub</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 5 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/copilot-billing/models-and-pricing" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Models &amp; Pricing for GitHub Copilot</div><div class="wb-res-type">Docs · GitHub</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 5 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://learn.github.com/courses/gitHubusagebasedbillingmodule" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Preparing for Usage-Based Billing</div><div class="wb-res-type">Course · GitHub Learn</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 30 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Break -->
+          <div class="wb-break">
+            <div class="wb-break-icon" aria-hidden="true"><img src="https://octodex.github.com/images/Sentrytocat_octodex.jpg" alt=""></div>
+            <div class="wb-break-body">
+              <div class="wb-break-title">Time to drink a fresh glass of water</div>
+              <div class="wb-break-desc">Hydration break, back on the trip in a minute!</div>
+            </div>
+            <span class="wb-break-badge">Break</span>
+          </div>
+
+          <!-- Stop 2 -->
+          <div class="wb-stop-wrap">
+            <div class="wb-stop-num">2</div>
+            <div class="wb-stop-card">
+              <div class="wb-stop-eyebrow">Stop 2</div>
+              <h2 class="wb-stop-title">Set up your budget</h2>
+              <div class="wb-stop-meta">
+                <span class="wb-aud wb-aud-admins">Admins</span>
+                <span class="wb-t">⏱ ≈ 1 h 35</span>
+              </div>
+              <div class="wb-resources">
+                <a class="wb-res" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/billing/budgets-for-usage-based-billing" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Understand budgeting</div><div class="wb-res-type">Docs · GitHub</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 5 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://learn.github.com/event/bb786fa6-d94c-4dd9-9917-11eee58265ef" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">UBB with Confidence: Billing Platform Controls</div><div class="wb-res-type">Webinar series</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 h</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://wellarchitected.github.com/library/governance/recommendations/managing-ai-credits/" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Managing AI Credits</div><div class="wb-res-type">GitHub Learn · Well-Architected</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 30 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Break -->
+          <div class="wb-break">
+            <div class="wb-break-icon" aria-hidden="true"><img src="https://octodex.github.com/images/yogitocat.png" alt=""></div>
+            <div class="wb-break-body">
+              <div class="wb-break-title">Time for a nap</div>
+              <div class="wb-break-desc">A power nap recharge, you have earned it.</div>
+            </div>
+            <span class="wb-break-badge">Break</span>
+          </div>
+
+          <!-- Stop 3 -->
+          <div class="wb-stop-wrap">
+            <div class="wb-stop-num">3</div>
+            <div class="wb-stop-card">
+              <div class="wb-stop-eyebrow">Stop 3</div>
+              <h2 class="wb-stop-title">Security assessment (GHAS)</h2>
+              <div class="wb-stop-meta">
+                <span class="wb-aud wb-aud-admins">Admins</span>
+                <span class="wb-t">⏱ ≈ 16 min 30</span>
+              </div>
+              <div class="wb-resources">
+                <a class="wb-res" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">See what you've been missing: 1-click code security risk assessment</div><div class="wb-res-type">Video</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 min 30</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://github.com/security" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Run a free GHAS security risk evaluation</div><div class="wb-res-type">github.com/security</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 15 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Break -->
+          <div class="wb-break">
+            <div class="wb-break-icon" aria-hidden="true"><img src="https://octodex.github.com/images/inflatocat.png" alt=""></div>
+            <div class="wb-break-body">
+              <div class="wb-break-title">Time to go for a swim</div>
+              <div class="wb-break-desc">…or a quick shower if you are not close to the sea!</div>
+            </div>
+            <span class="wb-break-badge">Break</span>
+          </div>
+
+          <!-- Stop 4 -->
+          <div class="wb-stop-wrap">
+            <div class="wb-stop-num">4</div>
+            <div class="wb-stop-card">
+              <div class="wb-stop-eyebrow">Stop 4</div>
+              <h2 class="wb-stop-title">Token optimization</h2>
+              <div class="wb-stop-meta">
+                <span class="wb-aud wb-aud-devs">Developers</span>
+                <span class="wb-t">⏱ ≈ 4 h 08</span>
+              </div>
+              <div class="wb-resources">
+                <a class="wb-res" href="https://code.visualstudio.com/blogs/2026/06/17/improving-token-efficiency-in-github-copilot" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Improving token efficiency in agentic workflows</div><div class="wb-res-type">Article · The GitHub Blog</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 12 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://ashy-dune-0b4215a0f.7.azurestaticapps.net/index.html" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Token Optimization Guide</div><div class="wb-res-type">Visual guide</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 h</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://learn.github.com/event/390d8d96-a2ba-4d80-aa8d-9f68b6bfaa3b" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Agent Quality &amp; Token Optimization</div><div class="wb-res-type">Webinar series</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 h</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://aka.ms/GHCPUBBWorkshop" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">UBB Workshops</div><div class="wb-res-type">Workshop</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 h 30</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <div class="wb-ex-label">✏️ Little exercises to practice</div>
+                <a class="wb-res wb-res-ex" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot wb-res-dot-ex"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">How Copilot auto mode selects the best AI model</div><div class="wb-res-type">Video · GitHub Checkout</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 12 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res wb-res-ex" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot wb-res-dot-ex"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Prompt engineering essentials: better results from LLMs</div><div class="wb-res-type">Tutorial · YouTube</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 9 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res wb-res-ex" href="https://docs.github.com/en/copilot/about-github-copilot/github-copilot-features" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot wb-res-dot-ex"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">About Copilot integrations</div><div class="wb-res-type">Docs · GitHub</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 5 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Break -->
+          <div class="wb-break">
+            <div class="wb-break-icon" aria-hidden="true"><img src="https://octodex.github.com/images/cherryontop-o-cat.png" alt=""></div>
+            <div class="wb-break-body">
+              <div class="wb-break-title">Time to eat your favourite ice cream</div>
+              <div class="wb-break-desc">A sweet reward before the big developer stretch.</div>
+            </div>
+            <span class="wb-break-badge">Break</span>
+          </div>
+
+          <!-- Stop 5 -->
+          <div class="wb-stop-wrap">
+            <div class="wb-stop-num">5</div>
+            <div class="wb-stop-card">
+              <div class="wb-stop-eyebrow">Stop 5</div>
+              <h2 class="wb-stop-title">Copilot CLI</h2>
+              <div class="wb-stop-meta">
+                <span class="wb-aud wb-aud-devs">Developers</span>
+                <span class="wb-t">⏱ ≈ 33 min</span>
+              </div>
+              <div class="wb-resources">
+                <a class="wb-res" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Ultimate GitHub Copilot CLI tutorial for beginners</div><div class="wb-res-type">Video · YouTube</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 23 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <div class="wb-ex-label">✏️ Little exercises to practice</div>
+                <a class="wb-res wb-res-ex" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot wb-res-dot-ex"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Agents, skills &amp; instructions in Copilot CLI</div><div class="wb-res-type">Tutorial · YouTube</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 6 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res wb-res-ex" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot wb-res-dot-ex"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Use MCP servers with GitHub Copilot CLI</div><div class="wb-res-type">Tutorial · YouTube</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 4 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Break -->
+          <div class="wb-break">
+            <div class="wb-break-icon" aria-hidden="true"><img src="https://octodex.github.com/images/sponsortocat.png" alt=""></div>
+            <div class="wb-break-body">
+              <div class="wb-break-title">Time to cuddle your belovings</div>
+              <div class="wb-break-desc">…or a pillow if you don't have ones on hand!</div>
+            </div>
+            <span class="wb-break-badge">Break</span>
+          </div>
+
+          <!-- Stop 6 -->
+          <div class="wb-stop-wrap">
+            <div class="wb-stop-num">6</div>
+            <div class="wb-stop-card">
+              <div class="wb-stop-eyebrow">Stop 6</div>
+              <h2 class="wb-stop-title">Copilot App</h2>
+              <div class="wb-stop-meta">
+                <span class="wb-aud wb-aud-devs">Developers</span>
+                <span class="wb-t">⏱ ≈ 14 min 30</span>
+              </div>
+              <div class="wb-resources">
+                <a class="wb-res" href="https://docs.github.com/en/rest/copilot" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">REST API endpoints for Copilot</div><div class="wb-res-type">Docs · GitHub</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 10 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <div class="wb-ex-label">✏️ Little exercises to practice</div>
+                <a class="wb-res wb-res-ex" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot wb-res-dot-ex"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Use the new impeccable skill in the Copilot app</div><div class="wb-res-type">Video · YouTube</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 min 30</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res wb-res-ex" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot wb-res-dot-ex"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Automate daily workflows with the Copilot app &amp; MCP</div><div class="wb-res-type">Video · YouTube</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 min 30</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res wb-res-ex" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot wb-res-dot-ex"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">From issue to merge with the Copilot app</div><div class="wb-res-type">Video · YouTube</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 min 30</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Break -->
+          <div class="wb-break">
+            <div class="wb-break-icon" aria-hidden="true"><img src="https://octodex.github.com/images/yogitocat.png" alt=""></div>
+            <div class="wb-break-body">
+              <div class="wb-break-title">Time to stretch, it is good for body and mind</div>
+              <div class="wb-break-desc">A little stretch keeps you fresh for the next stop.</div>
+            </div>
+            <span class="wb-break-badge">Break</span>
+          </div>
+
+          <!-- Stop 7 -->
+          <div class="wb-stop-wrap">
+            <div class="wb-stop-num">7</div>
+            <div class="wb-stop-card">
+              <div class="wb-stop-eyebrow">Stop 7</div>
+              <h2 class="wb-stop-title">Agentic workflows</h2>
+              <div class="wb-stop-meta">
+                <span class="wb-aud wb-aud-devs">Developers</span>
+                <span class="wb-t">⏱ ≈ 14 min</span>
+              </div>
+              <div class="wb-resources">
+                <a class="wb-res" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Introducing GitHub Agentic Workflows</div><div class="wb-res-type">Video · YouTube</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">How to use agentic workflows for your repos</div><div class="wb-res-type">Video · GitHub Checkout</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 12 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <div class="wb-ex-label">✏️ Little exercises to practice</div>
+                <a class="wb-res wb-res-ex" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot wb-res-dot-ex"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Automate your repo with GitHub agentic workflows</div><div class="wb-res-type">Video · YouTube</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Break -->
+          <div class="wb-break">
+            <div class="wb-break-icon" aria-hidden="true"><img src="https://octodex.github.com/images/yogitocat.png" alt=""></div>
+            <div class="wb-break-body">
+              <div class="wb-break-title">Time for relaxation</div>
+              <div class="wb-break-desc">Close your eyes for 2 minutes and just feel your environment. You can take a yoga pause if you want.</div>
+            </div>
+            <span class="wb-break-badge">Break</span>
+          </div>
+
+          <!-- Stop 8 -->
+          <div class="wb-stop-wrap">
+            <div class="wb-stop-num">8</div>
+            <div class="wb-stop-card">
+              <div class="wb-stop-eyebrow">Stop 8</div>
+              <h2 class="wb-stop-title">Getting ready for your next trips</h2>
+              <div class="wb-stop-meta">
+                <span class="wb-aud wb-aud-all">Everyone</span>
+                <span class="wb-t">⏱ ≈ 1 h 09</span>
+              </div>
+              <div class="wb-resources">
+                <a class="wb-res" href="https://github.com/orgs/github/projects/4247/views/1" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">GitHub Public Roadmap</div><div class="wb-res-type">Live board · github.com</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ Anytime</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://github.ondemand.goldcast.io/on-demand/1dd0b7b0-5d4e-4c83-b231-24a4eef1675a" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">GitHub Roadmap Webinar</div><div class="wb-res-type">Webinar</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 1 h</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Microsoft Build recap: The Download</div><div class="wb-res-type">Video · YouTube</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ 9 min</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Break -->
+          <div class="wb-break">
+            <div class="wb-break-icon" aria-hidden="true"><img src="https://octodex.github.com/images/dodgetocat_v2.png" alt=""></div>
+            <div class="wb-break-body">
+              <div class="wb-break-title">Time for a little exercise (if you can)</div>
+              <div class="wb-break-desc">Go for a run, or just a walk in the neighbourhood.</div>
+            </div>
+            <span class="wb-break-badge">Break</span>
+          </div>
+
+          <!-- Stop 9 -->
+          <div class="wb-stop-wrap">
+            <div class="wb-stop-num">9</div>
+            <div class="wb-stop-card">
+              <div class="wb-stop-eyebrow">Stop 9</div>
+              <h2 class="wb-stop-title">Get certified and keep learning</h2>
+              <div class="wb-stop-meta">
+                <span class="wb-aud wb-aud-all">Everyone</span>
+              </div>
+              <div class="wb-resources">
+                <a class="wb-res" href="https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Get GitHub Copilot certified</div><div class="wb-res-type">Exam · Microsoft Learn</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ Anytime</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+                <a class="wb-res" href="https://aka.ms/GHCPUBBResources" target="_blank" rel="noopener noreferrer">
+                  <div class="wb-res-dot"></div>
+                  <div class="wb-res-body"><div class="wb-res-name">Browse every resource at aka.ms/GHCPUBBResources</div><div class="wb-res-type">Hub · GitHub</div></div>
+                  <div class="wb-res-right"><span class="wb-res-time">⏱ Anytime</span><span class="wb-res-open">Open ↗</span></div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Checklist -->
+          <div class="wb-checklist">
+            <div class="wb-cl-title"><img src="https://octodex.github.com/images/motherhubbertocat.png" alt=""> <span>Your holiday packing checklist</span></div>
+            <div class="wb-cl-desc">Tick one win to pack from each stop of the trip</div>
+            <div class="wb-cl-grid" id="wbChecklist">
+              <label class="wb-cl-item"><input type="checkbox" data-cl="0"> Understand UBB: credits and pricing</label>
+              <label class="wb-cl-item"><input type="checkbox" data-cl="1"> Set a budget and turn on Stop usage</label>
+              <label class="wb-cl-item"><input type="checkbox" data-cl="2"> Run a GHAS security assessment</label>
+              <label class="wb-cl-item"><input type="checkbox" data-cl="3"> Trim context and pick the right model</label>
+              <label class="wb-cl-item"><input type="checkbox" data-cl="4"> Try GitHub Copilot in the CLI</label>
+              <label class="wb-cl-item"><input type="checkbox" data-cl="5"> Explore the Copilot App with MCP</label>
+              <label class="wb-cl-item"><input type="checkbox" data-cl="6"> Automate a repo with a workflow</label>
+              <label class="wb-cl-item"><input type="checkbox" data-cl="7"> Bookmark the GitHub public roadmap</label>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="wb-final">
+            <h2>See you in September!</h2>
+            <p>Thank you for taking the time to train. I hope you liked the trip, and that you feel super energized and ready to start September strong!</p>
+            <div class="wb-months">
+              <span class="wb-month">JUNE · PACK</span>
+              <span class="wb-month">JULY · EXPLORE</span>
+              <span class="wb-month">AUGUST · RELAX</span>
+              <span class="wb-month">SEPTEMBER · START STRONG</span>
+            </div>
+          </div>
+
+        </div><!-- /.wb-timeline -->
+      </div><!-- /.wb-content -->
+    </div><!-- /.summer-workbook -->
+  </div><!-- /#summer-view -->
 
   <!-- Tab Navigation -->
-  <nav class="nav-tabs" role="tablist">
-    <button class="nav-tab active" role="tab" aria-selected="true" data-tab="getting-started">🚀 Getting Started</button>
-    <button class="nav-tab" role="tab" aria-selected="false" data-tab="cost-governance">💰 Cost & Governance</button>
-    <button class="nav-tab" role="tab" aria-selected="false" data-tab="optimization">⚡ Optimization & Performance</button>
-    <button class="nav-tab" role="tab" aria-selected="false" data-tab="learning">📚 Learning & Webinars</button>
-    <button class="nav-tab" role="tab" aria-selected="false" data-tab="api-integration">🔌 API & Integration</button>
-    <button class="nav-tab" role="tab" aria-selected="false" data-tab="roadmap">🗺️ Roadmap</button>
+  <nav class="nav-tabs" role="tablist" aria-label="Resource categories">
+    <button class="nav-tab active" id="tab-getting-started" role="tab" aria-selected="true" aria-controls="getting-started" tabindex="0" data-tab="getting-started">🚀 Getting Started</button>
+    <button class="nav-tab" id="tab-cost-governance" role="tab" aria-selected="false" aria-controls="cost-governance" tabindex="-1" data-tab="cost-governance">💰 Cost & Governance</button>
+    <button class="nav-tab" id="tab-optimization" role="tab" aria-selected="false" aria-controls="optimization" tabindex="-1" data-tab="optimization">⚡ Optimization & Performance</button>
+    <button class="nav-tab" id="tab-learning" role="tab" aria-selected="false" aria-controls="learning" tabindex="-1" data-tab="learning">📚 Learning & Webinars</button>
+    <button class="nav-tab" id="tab-api-integration" role="tab" aria-selected="false" aria-controls="api-integration" tabindex="-1" data-tab="api-integration">🔌 API & Integration</button>
+    <button class="nav-tab" id="tab-roadmap" role="tab" aria-selected="false" aria-controls="roadmap" tabindex="-1" data-tab="roadmap">🗺️ Roadmap</button>
   </nav>
 
   <main>
@@ -1338,23 +2131,86 @@
     const tabs = document.querySelectorAll('.nav-tab');
     const sections = document.querySelectorAll('section[role="tabpanel"]');
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const tabName = tab.getAttribute('data-tab');
+    function activateTab(tab) {
+      const tabName = tab.getAttribute('data-tab');
 
-        // Update tab active states
-        tabs.forEach(t => {
-          t.classList.remove('active');
-          t.setAttribute('aria-selected', 'false');
-        });
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
+      // Update tab active states (roving tabindex for accessibility)
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      tab.setAttribute('tabindex', '0');
 
-        // Update section visibility
-        sections.forEach(section => {
-          section.classList.remove('active');
-        });
-        document.getElementById(tabName).classList.add('active');
+      // Update section visibility
+      sections.forEach(section => section.classList.remove('active'));
+      const panel = document.getElementById(tabName);
+      if (panel) panel.classList.add('active');
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activateTab(tab));
+
+      // Arrow / Home / End keyboard support per WAI-ARIA tabs pattern
+      tab.addEventListener('keydown', (e) => {
+        let target = null;
+        if (e.key === 'ArrowRight') target = tabs[(index + 1) % tabs.length];
+        else if (e.key === 'ArrowLeft') target = tabs[(index - 1 + tabs.length) % tabs.length];
+        else if (e.key === 'Home') target = tabs[0];
+        else if (e.key === 'End') target = tabs[tabs.length - 1];
+        if (target) {
+          e.preventDefault();
+          activateTab(target);
+          target.focus();
+        }
+      });
+    });
+
+    // ─── Summer Edition Toggle ───
+    const summerToggle = document.getElementById('summerToggle');
+    const summerBack = document.getElementById('summerBack');
+    const summerView = document.getElementById('summer-view');
+    const mainPageParts = [
+      document.querySelector('section.hero'),
+      document.querySelector('.nav-tabs'),
+      document.querySelector('main'),
+      document.querySelector('footer'),
+    ];
+
+    function enterSummerMode() {
+      mainPageParts.forEach(el => { if (el) el.style.display = 'none'; });
+      summerView.classList.add('visible');
+      summerToggle.classList.add('active');
+      summerToggle.setAttribute('aria-label', 'Exit Summer Edition');
+    }
+
+    function exitSummerMode() {
+      summerView.classList.remove('visible');
+      mainPageParts.forEach(el => { if (el) el.style.display = ''; });
+      summerToggle.classList.remove('active');
+      summerToggle.setAttribute('aria-label', 'Switch to Summer Edition');
+    }
+
+    summerToggle.addEventListener('click', () => {
+      if (summerView.classList.contains('visible')) {
+        exitSummerMode();
+      } else {
+        enterSummerMode();
+      }
+    });
+
+    summerBack.addEventListener('click', exitSummerMode);
+
+    // ─── Checklist Persistence ───
+    const clItems = document.querySelectorAll('#wbChecklist input[type="checkbox"]');
+    clItems.forEach(cb => {
+      const key = 'wb-cl-' + cb.dataset.cl;
+      try { if (localStorage.getItem(key) === '1') { cb.checked = true; cb.closest('.wb-cl-item').classList.add('checked'); } } catch(e) {}
+      cb.addEventListener('change', () => {
+        cb.closest('.wb-cl-item').classList.toggle('checked', cb.checked);
+        try { localStorage.setItem(key, cb.checked ? '1' : '0'); } catch(e) {}
       });
     });
   </script>
