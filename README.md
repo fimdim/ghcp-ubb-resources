@@ -10,6 +10,7 @@ Curated resources organized by role and use case to help you understand, govern,
 - [Learning & Webinars](#-learning--webinars)
 - [API & Integration](#-api--integration)
 - [Roadmap](#-roadmap)
+- [Holiday Workbook](#-holiday-workbook)
 - [Interactive Web Version](#-interactive-web-version)
 - [Contributing](#-contributing)
 
@@ -142,13 +143,20 @@ GitHub Roadmap resources and upcoming features for Copilot and related services.
 - [All Items · GitHub Public Roadmap](https://github.com/orgs/github/projects/4247/views/1)
 - [GitHub Roadmap Webinar, Q2 2026](https://github.ondemand.goldcast.io/on-demand/1dd0b7b0-5d4e-4c83-b231-24a4eef1675a?utm_source=social_linkedin&utm_medium=social&utm_campaign=AMER+Q2+Roadmap+Webinar)
 
+## 🏖️ Holiday Workbook
+
+This repository also includes The GitHub Holiday Workbook in two formats:
+
+- [HTML workbook experience](./index.html), available from the Summer Edition view inside the interactive site.
+- [PDF download](./the-github-holiday-workbook.pdf) for offline sharing or printing.
+
 ## 🌐 Interactive Web Version
 
-This repository also includes an interactive version of these resources in [index.html](./index.html).
+This repository also includes an interactive version of these resources in [index.html](./index.html), with tabbed navigation, theme support, and a Summer Edition workbook view.
 
 ### Run Locally
 
-- Open [index.html](./index.html) directly in your browser, or
+- Open [index.html](./index.html) directly in your browser to browse the resource library and workbook, or
 - Serve the folder with a local static server for stricter CSP behavior testing.
 
 ## 🤝 Contributing
